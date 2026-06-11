@@ -1,14 +1,26 @@
-from flask import Flask
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route("/")
 def welcome():
-    return "Welcome to this flask course. I love this course"
+    return "<html><h1> Welcome to flask course </h1></html>"
 
-@app.route("/index")
+@app.route("/index", methods=['GET'])
 def index():
-    return "Welcome to the index page of the flask course"
+    return render_template('index.html')
+
+@app.route("/about")
+def about():
+    return render_template('about.html')
+
+@app.route('/form', methods=['GET', 'POST'])
+def form():
+    if request.method == 'POST':
+        name = request.form['name']
+        return f'Hello {name}!'
+    
+    return render_template('form.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
