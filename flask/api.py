@@ -47,7 +47,7 @@ def create_item():
 def update_item(item_id):
     item = next((item for item in items if item["id"] == item_id), None)
     if item is None:
-        return jsonify({"error"}: "Item not found")
+        return jsonify({"error": "Item not found"})
     item['name'] = request.json.get('name', item['name'])
     item['description'] = request.json.get('description',item['description'])
     return jsonify(item)
